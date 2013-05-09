@@ -1,0 +1,14 @@
+<a class="lead" href="{{ bookmark.url }}">{{ bookmark.title }}</a>
+{% if bookmark.description %}
+    <br>{{ bookmark.description|linebreaksbr }}
+{% endif %}
+{% if not bookmark.is_public %}
+    <br><span class="badge badge-important">Private</span>
+{% else %}
+    <br>
+{% endif %}
+{% if bookmark.tags.count %}
+    {% for tag in bookmark.tags.all %}<span class="badge">{{ tag }}</span>&nbsp;{% endfor %}
+{% endif %}
+<br>by <a href="{% url "marcador_bookmark_user" bookmark.owner.username %}">{{ bookmark.owner.username }}</a>
+{{ bookmark.date_created|timesince }} ago
